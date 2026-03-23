@@ -4,71 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RozgarSathi - Local Job Portal</title>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        :root { --primary: #2E86C1; --bg: #FFFFFF; --card-bg: #F5F5F5; --text-dark: #333333; --border: #E0E0E0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: var(--bg); color: var(--text-dark); }
-        header { background-color: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+
+        :root {
+            --primary: #2E86C1;
+            --bg: #FFFFFF;
+            --card-bg: #F5F5F5;
+            --text-dark: #333333;
+            --border: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
         .logo-container h1 { font-size: 24px; font-weight: 700; }
-        .post-btn { background-color: white; color: var(--primary); padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; }
-        .banner { background-color: #EBF5FB; text-align: center; padding: 40px 20px; border-bottom: 1px solid var(--border); }
+        .logo-container a { color: white; text-decoration: none; }
+
+        .post-btn {
+            background-color: white;
+            color: var(--primary);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .banner {
+            background-color: #EBF5FB;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
         .banner h2 { color: var(--primary); margin-bottom: 10px; }
-        .categories { display: flex; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
-        .cat-btn { background-color: var(--card-bg); border: 1px solid var(--border); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; color: var(--text-dark); }
-        .job-container { padding: 20px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .job-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 8px; }
-        .job-card .header-tag { background-color: var(--primary); color: white; text-align: center; padding: 5px; font-size: 14px; font-weight: bold; border-radius: 4px; margin-bottom: 10px; }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .cat-btn:hover { background-color: var(--primary); color: white; }
+
+        .job-container {
+            padding: 20px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .job-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .job-card .header-tag {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
         .company-name { font-weight: bold; font-size: 18px; color: var(--primary); }
         .job-title { font-size: 16px; font-weight: 700; }
         .job-details { font-size: 14px; color: #555; }
-        .call-btn { margin-top: auto; background-color: #25D366; color: white; text-align: center; padding: 10px; text-decoration: none; border-radius: 4px; font-weight: bold; display: block; }
-        .whatsapp-cta { background-color: #25D366; color: white; text-align: center; padding: 30px 20px; margin-top: 40px; font-size: 20px; font-weight: bold; }
-        @media (max-width: 600px) { .job-container { grid-template-columns: 1fr; } }
+
+        .call-btn {
+            margin-top: auto;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .whatsapp-cta {
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .job-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <div class="logo-container"><h1>RozgarSathi</h1></div>
+        <div class="logo-container">
+            <h1><a href="index.html">RozgarSathi</a></h1>
+        </div>
         <a href="post-job.html" class="post-btn">Post Job FREE</a>
     </header>
+
     <section class="banner">
         <h2>Find Local Staff & Jobs Instantly</h2>
         <p>Your city's trusted manpower and classifieds portal.</p>
     </section>
+
     <section class="categories">
         <button class="cat-btn">All Jobs</button>
         <button class="cat-btn">Accountants</button>
         <button class="cat-btn">Helpers</button>
         <button class="cat-btn">Sales</button>
     </section>
-    <section class="job-container" id="job-board"></section>
-    <section class="whatsapp-cta">Get Daily Job Updates - Join Our WhatsApp Group!</section>
+
+    <section class="job-container" id="job-board">
+    </section>
+
+    <section class="whatsapp-cta">
+        Get Daily Job Updates - Join Our WhatsApp Group!
+    </section>
 
     <script>
-        const jobsData = [
-            { tag: "URGENT REQUIREMENT", company: "Surat Textiles Pvt Ltd", title: "Sr. Accountant", experience: "3-5 Years", salary: "₹20,000 - ₹25,000/month", location: "Ring Road, Surat", phone: "9876543210" },
-            { tag: "WE ARE HIRING", company: "Apex Manufacturing", title: "Dispatch Supervisor", experience: "1-2 Years", salary: "₹15,000/month", location: "GIDC, Pandesara", phone: "8765432109" }
-        ];
-        function renderJobs() {
+        // PASTE YOUR EXACT GOOGLE WEB APP URL BETWEEN THE QUOTES BELOW
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec'; 
+
+        async function loadJobs() {
             const jobBoard = document.getElementById('job-board');
-            jobBoard.innerHTML = ''; 
-            jobsData.forEach(job => {
-                jobBoard.innerHTML += `
-                    <div class="job-card">
-                        <div class="header-tag">${job.tag}</div>
-                        <div class="company-name">${job.company}</div>
-                        <div class="job-title">${job.title}</div>
-                        <div class="job-details">
-                            <p><strong>Exp:</strong> ${job.experience}</p>
-                            <p><strong>Salary:</strong> ${job.salary}</p>
-                            <p><strong>Location:</strong> ${job.location}</p>
-                        </div>
-                        <a href="tel:${job.phone}" class="call-btn">📞 Call: ${job.phone}</a>
-                    </div>`;
-            });
+            jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1; font-weight:bold; color:#2E86C1;">Loading latest jobs from RozgarSathi...</p>';
+
+            try {
+                const response = await fetch(scriptURL);
+                const jobsData = await response.json();
+
+                jobBoard.innerHTML = ''; // Clear loading text
+
+                if(jobsData.length === 0 || jobsData.result === 'error') {
+                    jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No jobs posted yet. Click "Post Job FREE" to add one!</p>';
+                    return;
+                }
+
+                // Create a job card for every row in your Google Sheet
+                jobsData.forEach(job => {
+                    // Fallbacks included just in case the sheet headers differ slightly from the form names
+                    const company = job['Company Name'] || job['Company/Business Name'] || 'Confidential';
+                    const exp = job['Experience'] || job['Experience Required'] || 'Not specified';
+                    const salary = job['Salary'] || job['Monthly Salary (₹)'] || 'Based on interview';
+                    const location = job['Location'] || job['Job Location'] || 'Not specified';
+                    const phone = job['Contact Number'] || job['WhatsApp/Contact Number'] || '';
+
+                    jobBoard.innerHTML += `
+                        <div class="job-card">
+                            <div class="header-tag">WE ARE HIRING</div>
+                            <div class="company-name">${company}</div>
+                            <div class="job-title">${job['Job Title']}</div>
+                            <div class="job-details">
+                                <p><strong>Exp:</strong> ${exp}</p>
+                                <p><strong>Salary:</strong> ${salary}</p>
+                                <p><strong>Location:</strong> ${location}</p>
+                            </div>
+                            <a href="tel:${phone}" class="call-btn">📞 Call: ${phone}</a>
+                        </div>`;
+                });
+            } catch (error) {
+                jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: red;">Failed to load jobs. Please check your internet connection.</p>';
+                console.error('Error fetching data:', error);
+            }
         }
-        document.addEventListener('DOMContentLoaded', renderJobs);
+
+        // Run the fetch function as soon as the page loads
+        document.addEventListener('DOMContentLoaded', loadJobs);
     </script>
 </body>
 </html>

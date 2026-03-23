@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - RozgarSathi</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #eee; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 13px; }
+        th { background: #2E86C1; color: white; }
+        .del-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1>Admin Dashboard (All Posts)</h1>
+        <a href="index.html">Back to Site</a>
+    </div>
+    <table id="adminTable">
+        <thead><tr><th>Date</th><th>Company</th><th>Roles</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="adminBody"></tbody>
+    </table>
+
+    <script>
+        const scriptURL = 'PASTE_YOUR_SCRIPT_URL_HERE';
+
+        async function loadAdmin() {
+            const response = await fetch(scriptURL);
+            const data = await response.json();
+            const body = document.getElementById('adminBody');
+            body.innerHTML = "";
+
+            data.reverse().forEach(row => {
+                const roles = `${row['Role 1']}, ${row['Role 2']}`.replace(', undefined', '');
+                const isDeleted = row.Status === "DELETED";
+                
+                body.innerHTML += `
+                    <tr>
+                        <td>${new Date(row.Timestamp).toLocaleDateString()}</td>
+                        <td>${row['Company Name']}</td>
+                        <td>${roles}</td>
+                        <td>${row.Status || 'Active'}</td>
+                        <td>
+                            ${isDeleted ? 'HIDDEN' : `<button class="del-btn" onclick="deleteJob('${row.Timestamp}')">Delete</button>`}
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        async function deleteJob(timestamp) {
+            if(!confirm("Are you sure you want to hide this post?")) return;
+            // Note: This requires a specific Google Script function to update status
+            alert("To enable deletion, please update your Google Script 'doPost' with the update logic.");
+        }
+
+        window.onload = loadAdmin;
+    </script>
+</body>
+</html>

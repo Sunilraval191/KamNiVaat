@@ -10,34 +10,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); }
         header { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -1px; }
-        .post-btn { background: var(--primary); color: white; padding: 0.7rem 1.4rem; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
-        .post-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
-        .hero { background: white; padding: 3rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
-        .search-container { max-width: 600px; margin: 0 auto 1.5rem; }
-        .search-container input { width: 100%; padding: 1.1rem 1.5rem; border-radius: 16px; border: 2px solid var(--border); outline: none; font-size: 1rem; transition: 0.2s; }
-        .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        .job-grid { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; max-width: 1300px; margin: 0 auto; }
-        .job-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 1.8rem; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
-        .job-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .v-badge { color: #0ea5e9; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .post-btn { background: var(--primary); color: white; padding: 0.7rem 1.4rem; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.9rem; }
+        .hero { background: white; padding: 2.5rem 5%; border-bottom: 1px solid var(--border); text-align: center; }
+        .search-box { max-width: 600px; margin: 0 auto; }
+        .search-box input { width: 100%; padding: 1.1rem 1.5rem; border-radius: 16px; border: 2px solid var(--border); outline: none; font-size: 1rem; }
+        .job-grid { padding: 2rem 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; max-width: 1300px; margin: 0 auto; }
+        .job-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 1.8rem; display: flex; flex-direction: column; transition: 0.3s; }
+        .job-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
+        .verified { color: #0ea5e9; font-size: 0.75rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px; text-transform: uppercase; }
         .co-name { font-size: 1.4rem; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
-        .loc { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; font-weight: 500; }
-        .role-box { background: #f1f5f9; border-radius: 16px; padding: 1.2rem; margin-bottom: 1rem; border: 1px solid var(--border); }
+        .loc { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 5px; font-weight: 500; }
+        .role-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; margin-bottom: 1rem; border-left: 5px solid var(--primary); }
         .role-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #1e293b; }
-        .info-pill { display: inline-flex; align-items: center; gap: 6px; background: white; border: 1px solid var(--border); padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; margin: 0 5px 5px 0; color: #475569; }
-        .jd-text { font-size: 0.85rem; color: #475569; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #cbd5e1; line-height: 1.4; }
+        .badge { font-size: 0.75rem; font-weight: 600; padding: 0.4rem 0.75rem; border-radius: 8px; background: white; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 6px; margin: 0 6px 6px 0; color: #475569; }
+        .jd { font-size: 0.85rem; color: #475569; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 8px; line-height: 1.4; }
         .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: auto; padding-top: 10px; }
-        .act-btn { text-align: center; padding: 1rem; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; color: white; }
+        .act-btn { text-align: center; padding: 1rem; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; }
         .call { background: var(--success); }
         .email { background: var(--cv); }
-        .act-btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">RozgarSathi</a><a href="post-job.html" class="post-btn">Post Job FREE</a></header>
+    <header><a href="index.html" class="logo">RozgarSathi</a><a href="post-job.html" class="post-link">Post Job FREE</a></header>
     <section class="hero">
-        <div class="search-container"><input type="text" id="searchInput" placeholder="Search area, company, or job title..."></div>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="Search area, company, or job role..."></div>
     </section>
     <div class="job-grid" id="jobBoard"></div>
 
@@ -47,7 +44,7 @@
 
     async function fetchJobs() {
         const board = document.getElementById('jobBoard');
-        board.innerHTML = "<p style='grid-column:1/-1; text-align:center; padding:5rem; color:#64748b;'>Searching for local talent...</p>";
+        board.innerHTML = "<p style='text-align:center; grid-column:1/-1; padding:3rem;'>Loading current openings...</p>";
         try {
             const response = await fetch(scriptURL);
             const data = await response.json();
@@ -58,41 +55,41 @@
                 const isFresh = (now - new Date(item.Timestamp).getTime()) < week;
                 return isFresh && item.Status !== "DELETED";
             }).reverse();
+
             display(allJobs);
-        } catch (e) { board.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:red;'>Database Connection Error.</p>"; }
+        } catch (e) { board.innerHTML = "<p style='text-align:center; color:red; grid-column:1/-1;'>Connection Error.</p>"; }
     }
 
     function display(list) {
         const board = document.getElementById('jobBoard'); board.innerHTML = "";
-        if (list.length === 0) { board.innerHTML = "<p style='grid-column:1/-1; text-align:center;'>No active jobs found.</p>"; return; }
-        
         list.forEach(row => {
             let roles = "";
-            for(let i=1; i<=3; i++) {
+            // LOOP THROUGH ALL 5 OPENINGS
+            for(let i=1; i<=5; i++) {
                 const r = row[`Role ${i}`], o = row[`Openings ${i}`];
                 if (r && r.trim() !== "") {
                     roles += `
-                        <div class="role-box">
+                        <div class="role-card">
                             <div class="role-title">${r}</div>
-                            <div class="pills">
-                                ${o ? `<span class="info-pill">👥 Openings: ${o}</span>` : ''}
-                                <span class="info-pill">⏳ Exp: ${row['Exp '+i] || 'Fresher'}</span>
-                                <span class="info-pill">💰 Salary: ${row['Salary '+i] || 'Best'}</span>
+                            <div>
+                                ${o ? `<span class="badge">👥 Openings: ${o} Positions</span>` : ''}
+                                <span class="badge">⏳ Exp: ${row['Exp '+i] || 'Fresher'}</span>
+                                <span class="badge">💰 Salary: ${row['Salary '+i] || 'Best'}</span>
                             </div>
-                            ${row['JD '+i] ? `<div class="jd-text">${row['JD '+i]}</div>` : ''}
+                            ${row['JD '+i] ? `<div class="jd">${row['JD '+i]}</div>` : ''}
                         </div>`;
                 }
             }
-            const v = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="v-badge">🛡️ Verified Business</div>' : '';
+            const v = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="verified">🛡️ Verified Business</div>' : '';
             board.innerHTML += `
                 <div class="job-card">
                     ${v}
                     <div class="co-name">${row['Company Name']}</div>
                     <div class="loc">📍 Location: ${row['Location']}</div>
-                    ${roles}
+                    <div>${roles}</div>
                     <div class="actions">
                         <a href="tel:${row['Contact Number']}" class="act-btn call">📞 Call</a>
-                        ${row['Company Email'] ? `<a href="mailto:${row['Company Email']}?subject=Job Application via RozgarSathi" class="act-btn email">📧 Send CV</a>` : ''}
+                        ${row['Company Email'] ? `<a href="mailto:${row['Company Email']}?subject=Job Application" class="act-btn email">📧 Send CV</a>` : ''}
                     </div>
                 </div>`;
         });
@@ -100,8 +97,8 @@
 
     document.getElementById('searchInput').addEventListener('input', (e) => {
         const q = e.target.value.toLowerCase();
-        const filtered = allJobs.filter(r => (r['Company Name']+r['Location']+r['Role 1']+r['Role 2']+r['Role 3']).toLowerCase().includes(q));
-        display(filtered);
+        const res = allJobs.filter(r => (r['Company Name']+r['Location']+r['Role 1']+r['Role 2']+r['Role 3']+r['Role 4']+r['Role 5']).toLowerCase().includes(q));
+        display(res);
     });
 
     window.onload = fetchJobs;

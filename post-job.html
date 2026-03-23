@@ -3,81 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post a Job - RozgarSathi</title>
+    <title>Post Job - RozgarSathi</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        :root { --primary: #2E86C1; --bg: #FFFFFF; --card-bg: #F5F5F5; --text-dark: #333333; --border: #E0E0E0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: var(--bg); color: var(--text-dark); }
-        header { background-color: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .logo-container h1 { font-size: 24px; font-weight: 700; }
-        .logo-container a { color: white; text-decoration: none; }
-        .post-btn { background-color: white; color: var(--primary); padding: 10px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; }
-        .form-container { padding: 40px 5%; display: flex; justify-content: center; }
-        .form-box { background-color: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 30px; width: 100%; max-width: 600px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .form-box h2 { color: var(--primary); margin-bottom: 5px; }
-        .form-box p { color: #666; margin-bottom: 25px; font-size: 14px; }
-        .input-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-        .input-group label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-        .input-group input, .input-group textarea { padding: 10px; border: 1px solid #CCC; border-radius: 4px; font-size: 16px; }
-        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary); }
-        .submit-btn { background-color: var(--primary); color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 10px; }
-        #success-msg { display: none; background-color: #D4EDDA; color: #155724; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px; border: 1px solid #C3E6CB; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .form-container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2E86C1; text-align: center; margin-bottom: 20px; }
+        .section-label { background: #EBF5FB; padding: 8px 12px; margin: 20px 0 10px 0; font-weight: bold; color: #2E86C1; border-radius: 4px; font-size: 14px; }
+        .input-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        .submit-btn { width: 100%; background: #2E86C1; color: white; padding: 14px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .submit-btn:hover { background: #21618C; }
+        .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container"><h1><a href="index.html">RozgarSathi</a></h1></div>
-        <a href="index.html" class="post-btn">Back to Jobs</a>
-    </header>
 
-    <section class="form-container">
-        <div class="form-box">
-            <h2>Post a Job for Free</h2>
-            <p>Fill out the details below. We will review and publish your job ad shortly.</p>
-            
-            <form id="job-form">
-                <div class="input-group"><label>Company Name</label><input type="text" name="Company Name"></div>
-                <div class="input-group"><label>Job Title</label><input type="text" name="Job Title"></div>
-                <div class="input-group"><label>Experience</label><input type="text" name="Experience"></div>
-                <div class="input-group"><label>Monthly Salary (₹)</label><input type="text" name="Salary"></div>
-                <div class="input-group"><label>Job Location</label><input type="text" name="Location"></div>
-                <div class="input-group"><label>Contact Number</label><input type="tel" name="Contact Number"></div>
-                <div class="input-group"><label>Job Description</label><textarea name="Description" rows="4"></textarea></div>
-                <button type="submit" id="submit-btn" class="submit-btn">Submit Job For Approval</button>
-            </form>
-
-            <div id="success-msg">
-                <h3>Success!</h3>
-                <p>Your job details have been received.</p>
-                <a href="index.html" style="display:inline-block; margin-top:10px; color:#155724; font-weight:bold;">Return to Homepage</a>
-            </div>
+<div class="form-container">
+    <h2>Post Job Openings</h2>
+    <form id="jobForm">
+        <div class="input-group">
+            <label>Company Name*</label>
+            <input type="text" name="Company Name" required placeholder="Ex: XYZ Ltd">
         </div>
-    </section>
+        <div class="input-group">
+            <label>Location*</label>
+            <input type="text" name="Location" required placeholder="Ex: Kalol">
+        </div>
+        <div class="input-group">
+            <label>WhatsApp Number*</label>
+            <input type="number" name="Contact Number" required placeholder="Ex: 9876543210">
+        </div>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec'; 
-        
-        const form = document.getElementById('job-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const successMsg = document.getElementById('success-msg');
+        <div class="section-label">OPENING #1</div>
+        <div class="input-group"><input type="text" name="Role 1" required placeholder="Job Title (Ex: Accountant)"></div>
+        <div class="input-group"><input type="text" name="Exp 1" placeholder="Experience (Ex: 1-2 Years)"></div>
+        <div class="input-group"><input type="text" name="Salary 1" placeholder="Salary (Ex: 15k - 20k)"></div>
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            submitBtn.innerHTML = 'Submitting...'; 
-            submitBtn.disabled = true;
+        <div class="section-label">OPENING #2 (Optional)</div>
+        <div class="input-group"><input type="text" name="Role 2" placeholder="Job Title"></div>
+        <div class="input-group"><input type="text" name="Exp 2" placeholder="Experience"></div>
+        <div class="input-group"><input type="text" name="Salary 2" placeholder="Salary"></div>
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    form.style.display = 'none'; 
-                    successMsg.style.display = 'block'; 
-                })
-                .catch(error => {
-                    alert("Something went wrong. Please try again.");
-                    submitBtn.innerHTML = 'Submit Job For Approval';
-                    submitBtn.disabled = false;
-                });
-        });
-    </script>
+        <div class="section-label">OPENING #3 (Optional)</div>
+        <div class="input-group"><input type="text" name="Role 3" placeholder="Job Title"></div>
+        <div class="input-group"><input type="text" name="Exp 3" placeholder="Experience"></div>
+        <div class="input-group"><input type="text" name="Salary 3" placeholder="Salary"></div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Submit All Openings</button>
+    </form>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec';
+    const form = document.getElementById('jobForm');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerHTML = "Posting...";
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(res => {
+                alert("Jobs posted successfully!");
+                window.location.href = "index.html";
+            })
+            .catch(err => {
+                alert("Error! Try again.");
+                btn.disabled = false;
+                btn.innerHTML = "Submit All Openings";
+            });
+    });
+</script>
 </body>
 </html>

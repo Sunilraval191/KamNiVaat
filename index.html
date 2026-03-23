@@ -79,9 +79,13 @@
             cursor: pointer;
             font-weight: bold;
             color: var(--text-dark);
+            transition: all 0.3s ease;
         }
 
-        .cat-btn:hover { background-color: var(--primary); color: white; }
+        .cat-btn:hover, .cat-btn.active { 
+            background-color: var(--primary); 
+            color: white; 
+        }
 
         .job-container {
             padding: 20px 5%;
@@ -112,16 +116,20 @@
             margin-bottom: 10px;
         }
 
-        .company-name { font-weight: bold; font-size: 18px; color: var(--primary); }
-        .job-title { font-size: 16px; font-weight: 700; }
-        .job-details { font-size: 14px; color: #555; }
+        .company-name { font-weight: bold; font-size: 20px; color: var(--primary); text-align: center; margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px;}
+        
+        /* New Styles for Multiple Roles */
+        .role-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .role-item { background-color: white; padding: 12px; border: 1px solid #ccc; border-left: 4px solid var(--primary); border-radius: 4px; }
+        .job-title { font-size: 16px; font-weight: 700; margin-bottom: 5px; color: #111; }
+        .job-details { font-size: 13px; color: #555; line-height: 1.4;}
 
         .call-btn {
             margin-top: auto;
             background-color: #25D366;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
@@ -158,14 +166,13 @@
     </section>
 
     <section class="categories">
-        <button class="cat-btn">All Jobs</button>
-        <button class="cat-btn">Accountants</button>
-        <button class="cat-btn">Helpers</button>
-        <button class="cat-btn">Sales</button>
+        <button class="cat-btn active" data-filter="all">All Jobs</button>
+        <button class="cat-btn" data-filter="accountant">Accountants</button>
+        <button class="cat-btn" data-filter="helper">Helpers</button>
+        <button class="cat-btn" data-filter="sales">Sales</button>
     </section>
 
-    <section class="job-container" id="job-board">
-    </section>
+    <section class="job-container" id="job-board"></section>
 
     <section class="whatsapp-cta">
         Get Daily Job Updates - Join Our WhatsApp Group!
@@ -174,6 +181,8 @@
     <script>
         // PASTE YOUR EXACT GOOGLE WEB APP URL BETWEEN THE QUOTES BELOW
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx0bkdHiRSSp8BCECIYzjv3rBWayLPoIz6_leNlTeRSCkJFW1GLJoIlAe2owfGuuY-T/exec'; 
+        
+        let allLiveJobs = []; 
 
         async function loadJobs() {
             const jobBoard = document.getElementById('job-board');
@@ -183,42 +192,123 @@
                 const response = await fetch(scriptURL);
                 const jobsData = await response.json();
 
-                jobBoard.innerHTML = ''; // Clear loading text
+                // 1. Filter out jobs older than 7 days
+                const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+                const currentTime = new Date().getTime();
 
-                if(jobsData.length === 0 || jobsData.result === 'error') {
-                    jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No jobs posted yet. Click "Post Job FREE" to add one!</p>';
-                    return;
-                }
-
-                // Create a job card for every row in your Google Sheet
-                jobsData.forEach(job => {
-                    // Fallbacks included just in case the sheet headers differ slightly from the form names
-                    const company = job['Company Name'] || job['Company/Business Name'] || 'Confidential';
-                    const exp = job['Experience'] || job['Experience Required'] || 'Not specified';
-                    const salary = job['Salary'] || job['Monthly Salary (₹)'] || 'Based on interview';
-                    const location = job['Location'] || job['Job Location'] || 'Not specified';
-                    const phone = job['Contact Number'] || job['WhatsApp/Contact Number'] || '';
-
-                    jobBoard.innerHTML += `
-                        <div class="job-card">
-                            <div class="header-tag">WE ARE HIRING</div>
-                            <div class="company-name">${company}</div>
-                            <div class="job-title">${job['Job Title']}</div>
-                            <div class="job-details">
-                                <p><strong>Exp:</strong> ${exp}</p>
-                                <p><strong>Salary:</strong> ${salary}</p>
-                                <p><strong>Location:</strong> ${location}</p>
-                            </div>
-                            <a href="tel:${phone}" class="call-btn">📞 Call: ${phone}</a>
-                        </div>`;
+                allLiveJobs = jobsData.filter(job => {
+                    if (job['Timestamp']) {
+                        const jobTime = new Date(job['Timestamp']).getTime();
+                        return (currentTime - jobTime) <= sevenDaysInMillis;
+                    }
+                    return true; 
                 });
+
+                // 2. Render the jobs (with the new grouping logic)
+                renderJobs(allLiveJobs);
+                setupFilters();
+
             } catch (error) {
                 jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: red;">Failed to load jobs. Please check your internet connection.</p>';
                 console.error('Error fetching data:', error);
             }
         }
 
-        // Run the fetch function as soon as the page loads
+        // Function to draw the job cards on the screen
+        function renderJobs(jobsToDisplay) {
+            const jobBoard = document.getElementById('job-board');
+            jobBoard.innerHTML = ''; 
+
+            if(jobsToDisplay.length === 0 || jobsToDisplay.result === 'error') {
+                jobBoard.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No jobs posted in the last 7 days. Click "Post Job FREE" to add one!</p>';
+                return;
+            }
+
+            // --- NEW AUTO-MERGE LOGIC ---
+            const groupedJobs = {};
+
+            jobsToDisplay.forEach(job => {
+                const company = job['Company Name'] || job['Company/Business Name'] || 'Confidential';
+                const phone = job['Contact Number'] || job['WhatsApp/Contact Number'] || '';
+                
+                // We create a unique ID for each company so we don't accidentally merge two different "XYZ Ltd"s with different phone numbers
+                const uniqueKey = company + "_" + phone;
+
+                // If this company isn't in our grouped list yet, add them
+                if (!groupedJobs[uniqueKey]) {
+                    groupedJobs[uniqueKey] = {
+                        companyName: company,
+                        phone: phone,
+                        roles: []
+                    };
+                }
+
+                // Add the specific role details into the company's list
+                groupedJobs[uniqueKey].roles.push({
+                    title: job['Job Title'] || 'Role not specified',
+                    exp: job['Experience'] || job['Experience Required'] || 'Not specified',
+                    salary: job['Salary'] || job['Monthly Salary (₹)'] || 'Based on interview',
+                    location: job['Location'] || job['Job Location'] || 'Not specified',
+                    rawTitle: job['Job Title'] ? job['Job Title'].toLowerCase() : ''
+                });
+            });
+
+            // --- HTML GENERATION ---
+            // Now we loop through our cleanly grouped companies and build the cards
+            Object.values(groupedJobs).forEach(companyData => {
+                let rolesHTML = '';
+                let allTitlesForFiltering = '';
+
+                companyData.roles.forEach(role => {
+                    rolesHTML += `
+                        <div class="role-item">
+                            <div class="job-title">${role.title}</div>
+                            <div class="job-details">
+                                <span><strong>Exp:</strong> ${role.exp}</span> <br>
+                                <span><strong>Salary:</strong> ${role.salary}</span> <br>
+                                <span><strong>Location:</strong> ${role.location}</span>
+                            </div>
+                        </div>
+                    `;
+                    allTitlesForFiltering += role.rawTitle + " ";
+                });
+
+                jobBoard.innerHTML += `
+                    <div class="job-card" data-title="${allTitlesForFiltering}">
+                        <div class="header-tag">WE ARE HIRING</div>
+                        <div class="company-name">${companyData.companyName}</div>
+                        <div class="role-list">
+                            ${rolesHTML}
+                        </div>
+                        <a href="tel:${companyData.phone}" class="call-btn">📞 Call to Apply: ${companyData.phone}</a>
+                    </div>`;
+            });
+        }
+
+        // Function to make the filter buttons work
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.cat-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter').toLowerCase();
+
+                    if (filterValue === 'all') {
+                        renderJobs(allLiveJobs);
+                    } else {
+                        const filteredJobs = allLiveJobs.filter(job => {
+                            const title = job['Job Title'] ? job['Job Title'].toLowerCase() : '';
+                            return title.includes(filterValue);
+                        });
+                        renderJobs(filteredJobs);
+                    }
+                });
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', loadJobs);
     </script>
 </body>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RozgarSathi | Jobs in Kalol</title>
+    <title>KamNiVaat | Jobs in Kalol & Gandhinagar</title>
+    <meta name="description" content="KamNiVaat - Local Job Portal. Find jobs for Accountants, Chemists, and Helpers for free.">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
@@ -21,6 +22,7 @@
         .co-name { font-size: 1.4rem; font-weight: 800; color: #0f172a; margin-bottom: 2px; }
         .loc { font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem; font-weight: 600; }
         .role-card { margin-bottom: 15px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 10px; }
+        .role-card:last-child { border-bottom: none; }
         .role-title { font-weight: 800; font-size: 1.1rem; color: #1e293b; margin-bottom: 5px; }
         .badge { font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 6px; background: #eff6ff; color: #1e40af; margin: 0 4px 4px 0; display: inline-block; }
         .jd-text { font-size: 0.85rem; color: #4b5563; margin-top: 8px; font-style: italic; border-left: 3px solid #e5e7eb; padding-left: 8px; }
@@ -30,7 +32,7 @@
     </style>
 </head>
 <body>
-    <header><a href="index.html" class="logo">RozgarSathi</a><a href="post-job.html" class="post-btn">Post Job FREE</a></header>
+    <header><a href="index.html" class="logo">KamNiVaat</a><a href="post-job.html" class="post-btn">Post Job FREE</a></header>
     <section class="hero"><div class="search-box"><input type="text" id="searchInput" placeholder="Search Company or Role..."></div></section>
     <div class="job-grid" id="jobBoard"></div>
 
@@ -40,7 +42,7 @@
 
     async function fetchJobs() {
         const board = document.getElementById('jobBoard');
-        board.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>Loading jobs...</p>";
+        board.innerHTML = "<p style='text-align:center; grid-column:1/-1;'>Fetching latest openings...</p>";
         try {
             const response = await fetch(scriptURL);
             const data = await response.json();
@@ -74,7 +76,7 @@
                     waText += `🔹 *${r}* ${q ? `[${q}]` : ''}%0A`;
                 }
             }
-            waText += `%0A👉 *Details:* https://sunilraval191-dot.github.io/rozgarsathi/`;
+            waText += `%0A👉 *Details:* https://sunilraval191-dot.github.io/kamnivaat/ %0A_Shared via KamNiVaat_`;
             
             const v = (row.Verified === "TRUE" || row.Verified === true) ? '<div class="v-badge">🛡️ Verified Business</div>' : '';
             board.innerHTML += `

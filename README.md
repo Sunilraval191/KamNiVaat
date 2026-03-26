@@ -6,7 +6,7 @@
 
 ### 1. SEO Metadata
 - **Portal Name:** KamNiVaat
-- **Primary Keywords:** Jobs in Kalol, Kalol job portal, Local hiring Gandhinagar, Accountant jobs Kalol.
+- **Primary Keywords:** Jobs in Kalol, Kalol job portal, Local hiring Gandhinagar, Accountant jobs Kalol, Kam Ni Vaat, Kam ni vat.
 - **Search Console:** Submit your GitHub URL to Google Search Console to rank for local job searches.
 
 ### 2. Viral Growth

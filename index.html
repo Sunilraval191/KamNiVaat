@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta property="og:title" content="KamNiVaat | Local Job Portal">
-<meta property="og:description" content="Find the latest jobs in Kalol, Gandhinagar and Ahmedabad.">
-<meta property="og:image" content="https://sunilraval191.github.io/KamNiVaat/poster.jpg">
-<meta property="og:url" content="https://sunilraval191.github.io/KamNiVaat/">
-<meta property="og:type" content="website">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>KamNiVaat | Local Jobs in Kalol & Gandhinagar</title>
     <meta name="description" content="KamNiVaat for local Nokri. Find jobs in Kalol, Ahmedabad, and Gandhinagar.">
-   <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
+    <meta name="keywords" content="Kam ni vat, Kam Ni Vaat, jobs in kalol, jobs in ahmedabad, jobs in gandhinagar, kadi, mahesana, nokri">
+    
+    <meta property="og:title" content="KamNiVaat | Local Job Portal">
+    <meta property="og:description" content="Find the latest jobs in Kalol, Gandhinagar and Ahmedabad.">
+    <meta property="og:image" content="https://sunilraval191.github.io/KamNiVaat/poster.jpg">
+    <meta property="og:url" content="https://sunilraval191.github.io/KamNiVaat/">
+    <meta property="og:type" content="website">
+
+    <meta name="google-site-verification" content="j3I1Wz_Ec_huvAWYzIh6CAZdJkLt0CL-eoitgro1Bsk" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
@@ -54,7 +58,6 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwyUadUReYZIBZmF1dxxGp2tEANZwH7X9lfsz5OSSR9Z2AsVcSjL1UrbPIKiQzCnsvD/exec';
     let allJobs = [];
 
-    // Helper function to check if data exists
     const safe = (val) => {
         if (!val) return null;
         const trimmed = val.toString().trim();
@@ -94,6 +97,20 @@
                 }
             }
 
+            // --- WHATSAPP MESSAGE LOGIC ---
+            const company = safe(row['Company Name']) || 'New Opening';
+            const location = safe(row['Location']) || 'Local Area';
+            const firstRole = safe(row['Role 1']) || 'Multiple Roles';
+
+            const waText = encodeURIComponent(
+                `*📢 New Job Alert on KamNiVaat* \n\n` +
+                `🏢 *Company:* ${company}\n` +
+                `📍 *Location:* ${location}\n` +
+                `💼 *Role:* ${firstRole}\n\n` +
+                `👉 *View details & Contact here:* \n` +
+                `https://sunilraval191.github.io/KamNiVaat/`
+            );
+
             html += `
                 <div class="job-card">
                     <div style="font-size:1.3rem; font-weight:800; color:#0f172a;">${safe(row['Company Name'])}</div>
@@ -114,7 +131,7 @@
                             </div>` : ''}
                     </div>
                     
-                    <a href="https://api.whatsapp.com/send?text=*Job Opening at ${row['Company Name']}*%0A📍 ${row['Location']}%0A%0A👉 View Details: https://sunilraval191.github.io/KamNiVaat/" target="_blank" class="share-btn">🟢 WhatsApp Share</a>
+                    <a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" class="share-btn">🟢 WhatsApp Share</a>
                 </div>`;
         });
         board.innerHTML = html;
